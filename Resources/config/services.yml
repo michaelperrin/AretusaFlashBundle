@@ -1,0 +1,7 @@
+parameters:
+#    aretusa_flash.example.class: Aretusa\FlashBundle\Example
+
+services:
+#    aretusa_flash.example:
+#        class: %aretusa_flash.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
