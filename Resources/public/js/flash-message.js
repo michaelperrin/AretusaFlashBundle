@@ -1,102 +1,129 @@
-FlashMessage = (function () {
-    var hideDelay = 4500;
+(function($) {
+    var methods = {
+        init: function(options) {
+            methods.settings = $.extend({}, $.fn.flashNotification.defaults, options);
 
-    function init() {
-        $(document).ready(function($) {
-            setTimeout(function() { $('.alert').show('slow').delay(hideDelay).hide('fast'); }, 500);
+            setTimeout(
+                function() {
+                    $('.alert')
+                        .show('slow')
+                        .delay(methods.settings.hideDelay)
+                        .hide('fast')
+                    ;
+                },
+                500
+            );
 
-            listenIncomingMessages();
-        });
-    }
+            methods.listenIncomingMessages();
+        },
 
-    /**
-     * Listen to AJAX responses and display messages if they contain some
-     */
-    function listenIncomingMessages() {
-        $(document).ajaxComplete(function(event, xhr, settings) {
-            var data = $.parseJSON(xhr.responseText);
+        /**
+         * Listen to AJAX responses and display messages if they contain some
+         */
+        listenIncomingMessages: function() {
+            $(document).ajaxComplete(function(event, xhr, settings) {
+                var data = $.parseJSON(xhr.responseText);
 
-            if (data.messages) {
-                var messages = data.messages;
+                if (data.messages) {
+                    var messages = data.messages;
 
-                var i;
+                    var i;
 
-                if (messages.error) {
-                    for (i = 0; i < messages.error.length; i++) {
-                        addError(messages.error[i]);
+                    if (messages.error) {
+                        for (i = 0; i < messages.error.length; i++) {
+                            methods.addError(messages.error[i]);
+                        }
+                    }
+
+                    if (messages.success) {
+                        for (i = 0; i < messages.success.length; i++) {
+                            methods.addSuccess(messages.success[i]);
+                        }
+                    }
+
+                    if (messages.info) {
+                        for (i = 0; i < messages.info.length; i++) {
+                            methods.addInfo(messages.info[i]);
+                        }
                     }
                 }
+            });
+        },
 
-                if (messages.success) {
-                    for (i = 0; i < messages.success.length; i++) {
-                        addSuccess(messages.success[i]);
-                    }
-                }
-            }
-        });
-    }
+        addSuccess: function(message) {
+            var flashMessageElt = methods.getBasicFlash(message).addClass('alert-success');
 
-    function addSuccess(message) {
-        var flashMessageElt = getBasicFlash(message).addClass('alert-success');
+            methods.addToList(flashMessageElt);
+            methods.display(flashMessageElt);
+        },
 
-        addToList(flashMessageElt);
-        display(flashMessageElt);
-    }
+        addError: function(message) {
+            var flashMessageElt = methods.getBasicFlash(message).addClass('alert-error');
 
-    function addError(message) {
-        var flashMessageElt = getBasicFlash(message).addClass('alert-error');
+            methods.addToList(flashMessageElt);
+            methods.display(flashMessageElt);
+        },
 
-        addToList(flashMessageElt);
-        display(flashMessageElt);
-    }
+        addInfo: function(message) {
+            var flashMessageElt = methods.getBasicFlash(message).addClass('alert-info');
 
-    function addInfo(message) {
-        var flashMessageElt = getBasicFlash(message).addClass('alert-info');
+            methods.addToList(flashMessageElt);
+            methods.display(flashMessageElt);
+        },
 
-        addToList(flashMessageElt);
-        display(flashMessageElt);
-    }
+        getBasicFlash: function(message) {
+            var flashMessageElt = $('<div></div>')
+                .hide()
+                .addClass('alert')
+                .append(methods.getCloseButton())
+                .append($('<div></div>').html(message))
+            ;
 
-    function getBasicFlash(message) {
-        var flashMessageElt = $('<div></div>')
-            .hide()
-            .addClass('alert')
-            .append(getCloseButton())
-            .append($('<div></div>').html(message))
-        ;
+            return flashMessageElt;
+        },
 
-        return flashMessageElt;
-    }
+        getCloseButton: function() {
+            var closeButtonElt = $('<button></button>')
+                .addClass('close')
+                .attr('data-dismiss', 'alert')
+                .html('&times')
+            ;
 
-    function getCloseButton() {
-        var closeButtonElt = $('<button></button>')
-            .addClass('close')
-            .attr('data-dismiss', 'alert')
-            .html('&times')
-        ;
+            return closeButtonElt;
+        },
 
-        return closeButtonElt;
-    }
+        addToList: function(flashMessageElt) {
+            flashMessageElt.appendTo($('#flash-messages'));
+        },
 
-    function addToList(flashMessageElt) {
-        flashMessageElt.appendTo($('#flash-messages'));
-    }
-
-    function display(flashMessageElt) {
-        setTimeout(
-            function() {
-                flashMessageElt
-                    .show('slow')
-                    .delay(hideDelay)
-                    .hide('fast', function() { $(this).remove(); } )
-                ;
-            },
-            500
-        );
-    }
-
-    return {
-        init: init,
-        addSuccess: addSuccess
+        display: function(flashMessageElt) {
+            setTimeout(
+                function() {
+                    flashMessageElt
+                        .show('slow')
+                        .delay(methods.settings.hideDelay)
+                        .hide('fast', function() { $(this).remove(); } )
+                    ;
+                },
+                500
+            );
+        }
     };
-})();
+
+    $.fn.flashNotification = function(method) {
+        // Method calling logic
+        if (methods[method]) {
+            return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || ! method) {
+            return methods.init.apply(this, arguments);
+        } else {
+            $.error('Method ' +  method + ' does not exist on jQuery.flashNotification');
+        }
+    };
+
+    $.fn.flashNotification.defaults = {
+        'hideDelay'         : 4500,
+        'autoHide'          : true,
+        'animate'           : true
+    };
+})(jQuery);
