@@ -1,3 +1,0 @@
-aretusa_flash_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AretusaFlashBundle:Default:index }
