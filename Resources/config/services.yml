@@ -1,7 +1,9 @@
 parameters:
-#    aretusa_flash.example.class: Aretusa\FlashBundle\Example
+    aretusa_flash_bundle.flash_messenger.class: Aretusa\Bundle\FlashBundle\Messenger\Flash
 
 services:
-#    aretusa_flash.example:
-#        class: %aretusa_flash.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    aretusa_flash_bundle.flash_messenger:
+        class: %aretusa_flash_bundle.flash_messenger.class%
+        arguments: ["@session"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response}
