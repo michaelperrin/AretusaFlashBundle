@@ -22,6 +22,15 @@
     margin-bottom: 20px;
 }
 
+
+#flash-messages .alert.alert-success {
+    background-image: url('../images/alert-valid-icon.png');
+}
+
+#flash-messages .alert.alert-error {
+    background-image: url('../images/alert-error-icon.png');
+}
+
 #flash-messages .alert .close {
     color: white;
     color: rgba(255, 255, 255, 0.8);
