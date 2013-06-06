@@ -1,6 +1,6 @@
 <?php
 
-namespace Aretusa\FlashBundle\Tests\Controller;
+namespace Aretusa\Bundle\FlashBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

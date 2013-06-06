@@ -1,6 +1,6 @@
 <?php
 
-namespace Aretusa\FlashBundle\DependencyInjection;
+namespace Aretusa\Bundle\FlashBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aretusa\FlashBundle;
+namespace Aretusa\Bundle\FlashBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
