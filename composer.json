@@ -1,0 +1,29 @@
+{
+    "name": "aretusa/flash-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle extends the Symfony2 flash message system to handle messages for AJAX requests.",
+    "keywords": ["ajax", "json", "flash messages"],
+    "homepage": "https://github.com/michaelperrin/AretusaFlashBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michaël Perrin",
+            "email": "michael@perrin.se",
+            "homepage": "http://www.michaelperrin.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.1"
+    },
+    "autoload": {
+        "psr-0": { "Aretusa\\Bundle\\FlashBundle": "" }
+    },
+    "target-dir": "Aretusa/Bundle/FlashBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.3.x-dev"
+        }
+    }
+}
