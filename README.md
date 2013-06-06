@@ -68,8 +68,9 @@ Add jQuery as well if it's not already done.
 ``` twig
 {% block javascripts %}
     // ...
-    <script src="{{ asset('bundles/aretusaflash/js/flash-message.js') }}" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="{{ asset('bundles/aretusaflash/js/bootstrap.alert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/aretusaflash/js/flash-message.js') }}" type="text/javascript"></script>
 {% endblock %}
 ```
 
