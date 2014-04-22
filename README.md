@@ -12,7 +12,7 @@ More information here: http://blog.michaelperrin.fr/2013/03/07/notification-flas
 
 # Installation
 
-Add FOSUserBundle in your `composer.json` file:
+Add AretusaFlashBundle in your `composer.json` file:
 
 ```js
 {
