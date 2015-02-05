@@ -17,7 +17,7 @@ Add AretusaFlashBundle in your `composer.json` file:
 ```js
 {
     "require": {
-        "aretusa/flash-bundle": "dev-master"
+        "aretusa/flash-bundle": "~1.0"
     }
 }
 ```
@@ -81,4 +81,10 @@ Add jQuery as well if it's not already done.
 ```
 
 # Usage
+
+Add this call to a script block in your layout or to some of your templates:
+
+```
+$('#flash-messages').flashNotification('init');
+```
 

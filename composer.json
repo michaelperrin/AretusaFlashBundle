@@ -23,7 +23,7 @@
     "target-dir": "Aretusa/Bundle/FlashBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.3.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
