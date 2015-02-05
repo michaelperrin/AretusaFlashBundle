@@ -85,6 +85,8 @@ Add jQuery as well if it's not already done.
 Add this call to a script block in your layout or to some of your templates:
 
 ```
+<script>
 $('#flash-messages').flashNotification('init');
+</script>
 ```
 
