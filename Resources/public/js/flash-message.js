@@ -5,7 +5,7 @@
 
             setTimeout(
                 function() {
-                    $('.alert')
+                    $('#flash-messages .alert')
                         .show('slow')
                         .delay(methods.settings.hideDelay)
                         .hide('fast')
